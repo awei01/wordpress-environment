@@ -1,0 +1,22 @@
+{
+	"name": "awei01/cai",
+	"description": "Contemporary Arts International",
+	"keywords": [""],
+	"license": "proprietary",
+	"require": {
+	},
+	"require-dev": {
+		"mockery/mockery": "0.9.*"
+	},
+	"autoload": {
+		"psr-0": {
+			"" : ["lib/", "tests/"]
+		}
+	},
+	"scripts": {
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev"
+}
