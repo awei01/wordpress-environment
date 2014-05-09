@@ -5,7 +5,7 @@
 !lib
 !tests
 # uncomment the following line if you do not have composer on your non-development environment
-# !vendor/*
+# !vendor
 
 !.gitignore
 !composer.json
