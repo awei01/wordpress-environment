@@ -31,7 +31,7 @@ This is a repository that seeks to make wordpress more portable and easier to ve
 
 For security purposes the `/bootstrap/configs.php` file is not under source control by default. If you are using private repository, and are aware of the risks, you can remove the `/bootstrap/.gitignore` file and keep the your `/bootstrap/configs.php` file under source control.
 
-You should copy the following code and save it under `/bootstrap/configs.php`
+You should copy the following code and save it under `/bootstrap/configs.php`. Obviously, if this file isn't under source control, you'll have to manually copy this to your remote server to `/bootstrap/configs.php`
 
 ```
 <?php
