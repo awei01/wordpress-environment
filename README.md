@@ -29,7 +29,57 @@ This is a repository that seeks to make wordpress more portable and easier to ve
 
 ## Configuration ##
 
-The configuration for your environments is located here `/bootstrap/configs.php`.
+For security purposes the `/bootstrap/configs.php` file is not under source control by default. If you are using private repository, and are aware of the risks, you can remove the `/bootstrap/.gitignore` file and keep the your `/bootstrap/configs.php` file under source control.
+
+You should copy the following code and save it under `/bootstrap/configs.php`
+
+```
+<?php
+
+return array(
+
+	'shared' => array(
+		// this defines where your backups are going to be stored. Currently defaults to /projectroot/backups
+		'backup_path' => __DIR__ . '/../backups',
+	),
+
+	// copy the following block for each enviornment you want to support
+	/*
+	'environment' => array(
+
+		'url' => 'environment.url.com',
+
+		'database' => array(
+			'db_name' => 'environment database name',
+			'db_user' => 'environment database username',
+			'db_password' => 'environment database password',
+			'db_host' => 'environment host'
+
+			// uncomment the following line if your server does not allow DROP DATABASE statements
+			// 'no_drop' => true
+		),
+
+		)
+	),
+	*/
+
+	// configs for local enviornment
+	'local' => array(
+
+		'url' => 'someurl.local',
+
+		'database' => array(
+			'db_name' => 'local database name',
+			'db_user' => 'local database username',
+			'db_password' => 'local database password',
+			'db_host' => 'localhost'
+		),
+
+	),
+
+);
+
+```
 
 Brief explanation of each of the elements in the config file.
 
@@ -138,7 +188,21 @@ If you do not have composer package management on your remote environment, you'l
 
 Ideally all of your wordpress envrionment urls will not be located in a subfolder. But, if your wordpress url needs to be something like `www.envrionment.com/blog`, you may run into an issue with accessing some of your uploaded files/images when you switch between envrionments. One possible work around is to make all of your envrionments use the same `/blog` subpath and configure your apache accordingly so that it serves up the correct index.php.
 
+### No mysqli client on remote ###
+
+You may run into the problem where you can't create a mysql client on the remote server. Shouldn't be a huge deal, because most sites use have a phpMyAdmin interface that you can use to upload the appropriate backup script.
+
 
 ## Contributing ##
 
 Feel free to fork. Pull requests considered. This was a quick and dirty application I made and there is plenty of room for improvement. If you're mucking with the `/lib` stuff, please also provide tests in `/tests`
+
+## Todo list ##
+
+* Generate security salts in Enviornment class using some hash of the host name and some constant. Otherwise, anyone looking at the wp_config.php salts and the mysql dumps can hack sensitive data.
+
+* Better error handling
+
+* Handle remote hosts that don't allow for mysqli
+
+* Completely empty the target backup directory before generating scripts. This will delete unnecessary backup scripts for environments that don't exist.
