@@ -2,7 +2,7 @@
 	"name": "awei01/cai",
 	"description": "Contemporary Arts International",
 	"keywords": [""],
-	"license": "proprietary",
+	"license": "MIT",
 	"require": {
 	},
 	"require-dev": {
